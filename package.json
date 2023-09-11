@@ -20,7 +20,7 @@
     "serve": "pnpm --filter @apps/admin dev",
     "format": "pnpm run lint:eslint & pnpm run lint:stylelint & pnpm run lint:prettier",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "pnpm run stub",
+    "postinstall": "pnpm --filter @config/** prepack && pnpm run stub",
     "lint:eslint": "eslint . --cache --max-warnings 0 --fix",
     "lint:prettier": "prettier --write  \"{packages,apps,configs,scripts}/**/*.{js,json,ts,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint --fix ",
@@ -59,4 +59,3 @@
   },
   "packageManager": "pnpm@7.1.0"
 }
-

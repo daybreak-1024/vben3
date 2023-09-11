@@ -11,7 +11,8 @@
     "stylelint.js"
   ],
   "scripts": {
-    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo"
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turbo",
+    "cleans": "pnpm rimraf node_modules && pnpm rimraf dist && pnpm rimraf .turboss"
   },
   "dependencies": {
     "@commitlint/cli": "^17.4.2",
