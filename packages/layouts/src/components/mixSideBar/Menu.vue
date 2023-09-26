@@ -5,7 +5,7 @@ import { VbenIconify } from '@vben/vbencomponents'
 import { context } from '../../../bridge'
 import { NavBarModeEnum } from '@vben/constants'
 import { useI18n } from '@vben/locale'
-import SiderTrigger from "./SiderTrigger.vue"
+import SiderTrigger from "../trigger/SiderTrigger.vue"
 import MixMenu from "../menu/mix-sub-menu.vue";
 import {
   RouteLocationNormalized
@@ -39,14 +39,6 @@ const childrenTitle= ref('');
 onMounted(async () => {
   menuModules.value = await getShallowMenus();
   openMenu.value = unref(getMixSideFixed)
-});
-
-listenerRouteChange((route) => {
-  currentRoute.value = route;
-  setActive(true);
-  if (unref(getCloseMixSidebarOnChange)) {
-    closeMenu();
-  }
 });
 
 const getIsFixed = computed(() => {
@@ -122,6 +114,15 @@ function closeMenu() {
     openMenu.value = false;
   }
 }
+
+listenerRouteChange((route) => {
+  currentRoute.value = route;
+  setActive(true);
+  if (unref(getCloseMixSidebarOnChange)) {
+    closeMenu();
+  }
+});
+
 // Set the currently active menu and submenu
 async function setActive(setChildren = false) {
   const path = currentRoute.value?.path;

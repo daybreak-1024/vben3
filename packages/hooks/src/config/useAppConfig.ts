@@ -39,7 +39,7 @@ export const useAppConfig = () => {
       if (!isSupported)
         return console.error('Your browser does not support Clipboard API')
       const source = reactive(_omit(appConfigOptions, ['openSettingDrawer']))
-      await copy(JSON.stringify(source))
+      await copy(JSON.stringify(source, null, 2))
     } catch (e) {
       console.error(e)
     }
@@ -60,6 +60,7 @@ export const useAppConfig = () => {
     }
     return unref(menu).collapsedShowTitle && unref(sidebar).collapsed
   })
+
   return {
     ...appConfigOptions,
     setAppConfig,
@@ -79,7 +80,6 @@ function handlerResults(
   value: any,
   configOptions: DefineAppConfigOptions,
 ): DeepPartial<DefineAppConfigOptions> {
-  console.log(event, value)
   const { themeColor, theme, sidebar, header } = configOptions
   switch (event) {
     case HandlerSettingEnum.CHANGE_LAYOUT:
@@ -91,6 +91,7 @@ function handlerResults(
           ...splitOpt,
           mode,
         },
+        sidebar: { collapsed: false },
       }
 
     case HandlerSettingEnum.CHANGE_THEME_COLOR:
@@ -171,9 +172,10 @@ function handlerResults(
     case HandlerSettingEnum.FULL_CONTENT:
       return {
         content: { fullScreen: value },
-        sidebar: { visible: !value, show: !value },
+        // sidebar: { visible: !value, show: !value },
         header: { visible: !value, show: !value },
         tabTar: { visible: !value, show: !value },
+        menu: { show: !value },
       }
 
     case HandlerSettingEnum.CONTENT_MODE:
