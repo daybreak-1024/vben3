@@ -156,6 +156,10 @@ export function useMenuSetting() {
     return `calc(100% - ${unref(width)}px)`
   })
 
+  const getIsFixed = computed(() => {
+    return unref(getMixSideFixed) && unref(mixSideHasChildren)
+  })
+
   // Set menu configuration
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
     configStore.setAppConfig({ menu: menuSetting })
@@ -207,6 +211,7 @@ export function useMenuSetting() {
     getMixSideTrigger,
     getMixSideFixed,
     mixSideHasChildren,
+    getIsFixed,
     getMenuShowLogo,
   }
 }
